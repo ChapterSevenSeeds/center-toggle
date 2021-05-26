@@ -1,6 +1,6 @@
 {
   "name": "center-toggle",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "main": "dist/CenterToggle.js",
   "module": "dist/CenterToggle.js",
   "typings": "dist/index",
