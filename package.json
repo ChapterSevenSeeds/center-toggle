@@ -1,9 +1,8 @@
 {
-  "name": "center-toggle",
-  "version": "1.0.7",
+  "name": "react-center-toggle",
+  "version": "1.1.4",
   "main": "dist/CenterToggle.js",
   "module": "dist/CenterToggle.js",
-  "typings": "dist/index",
   "description": "Toggles a component directly centered above another.",
   "scripts": {
     "start": "react-scripts start",
@@ -13,12 +12,15 @@
   "eslintConfig": {
     "extends": "react-app"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ChapterSevenSeeds/react-center-toggle"
+  },
   "author": "Tyson Jones",
   "license": "ISC",
   "devDependencies": {
     "@babel/cli": "^7.14.3",
     "@babel/core": "^7.6.2",
-    "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
     "@babel/preset-react": "^7.0.0",
     "@babel/runtime": "^7.6.2",
