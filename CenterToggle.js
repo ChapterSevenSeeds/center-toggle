@@ -17,8 +17,8 @@ export function CenterToggleContainer(props) {
         } else if (child.type === CenterToggleChild) {
             childrenChild = child;
         } else {
-            console.error("CenterToggleContainer can only have two children of type 'CenterToggleItem' and 'CenterToggleChildren'.");
-            throw new Error("CenterToggleContainer can only have two children of type 'CenterToggleItem' and 'CenterToggleChildren'.");
+            console.error("CenterToggleContainer can only have two children of type 'CenterToggleItem' and 'CenterToggleChild'.");
+            throw new Error("CenterToggleContainer can only have two children of type 'CenterToggleItem' and 'CenterToggleChild'.");
         }
     }
 
