@@ -12,11 +12,11 @@ var _react = _interopRequireWildcard(require("react"));
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
-function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -78,8 +78,8 @@ function CenterToggleContainer(props) {
       } else if (child.type === CenterToggleChild) {
         childrenChild = child;
       } else {
-        console.error("CenterToggleContainer can only have two children of type 'CenterToggleItem' and 'CenterToggleChildren'.");
-        throw new Error("CenterToggleContainer can only have two children of type 'CenterToggleItem' and 'CenterToggleChildren'.");
+        console.error("CenterToggleContainer can only have two children of type 'CenterToggleItem' and 'CenterToggleChild'.");
+        throw new Error("CenterToggleContainer can only have two children of type 'CenterToggleItem' and 'CenterToggleChild'.");
       }
     }
   } catch (err) {
@@ -104,7 +104,7 @@ function CenterToggleContainer(props) {
   (0, _react.useEffect)(function () {
     if (props.toggled) {}
   }, [props.toggled]);
-  return /*#__PURE__*/_react["default"].createElement(_react.Fragment, null, /*#__PURE__*/_react["default"].createElement(itemChild.type, _extends({}, itemChild.props, {
+  return /*#__PURE__*/_react.default.createElement(_react.Fragment, null, /*#__PURE__*/_react.default.createElement(itemChild.type, _extends({}, itemChild.props, {
     toggled: props.toggled,
     boundingBox: {
       boundingBoxTop: boundingBoxTop,
@@ -115,7 +115,7 @@ function CenterToggleContainer(props) {
       itemWidth: itemWidth
     },
     ref: itemRef
-  })), /*#__PURE__*/_react["default"].createElement(childrenChild.type, _extends({}, childrenChild.props, {
+  })), /*#__PURE__*/_react.default.createElement(childrenChild.type, _extends({}, childrenChild.props, {
     ref: childrenRef
   })));
 }
@@ -128,7 +128,7 @@ var CenterToggleItem = /*#__PURE__*/(0, _react.forwardRef)(function (props, ref)
       boundingBoxWidth = _props$boundingBox.boundingBoxWidth,
       itemHeight = _props$boundingBox.itemHeight,
       itemWidth = _props$boundingBox.itemWidth;
-  return /*#__PURE__*/_react["default"].createElement("div", {
+  return /*#__PURE__*/_react.default.createElement("div", {
     ref: ref,
     style: {
       position: 'absolute',
@@ -149,7 +149,7 @@ var CenterToggleChild = /*#__PURE__*/(0, _react.forwardRef)(function (props, ref
     throw err;
   }
 
-  return /*#__PURE__*/_react["default"].createElement(child.type, _extends({
+  return /*#__PURE__*/_react.default.createElement(child.type, _extends({
     ref: ref
   }, child.props));
 });
