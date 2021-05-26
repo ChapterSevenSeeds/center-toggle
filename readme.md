@@ -11,10 +11,10 @@ The module must be used like so:
 
     <CenterToggleContainer toggled={/* A stateful boolean */}>
         <CenterToggleItem>
-            /* The child element to be toggled. */
+            {/* The child element to be toggled. */}
         </CenterToggleItem>
         <CenterToggleChild>
-            /* The child element centered above which the 'CenterToggleItem' will appear. */
+            {/* The child element centered above which the 'CenterToggleItem' will appear. */}
         </CenterToggleChild>
     </CenterToggleContainer>
 
