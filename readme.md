@@ -54,7 +54,7 @@ The following code snippet provides a button the clicking of which will hide and
 - The three functional components exported by the module are purely functions and nothing more. They do not represent a tangible piece of the DOM.
 - The 'CenterToggleContainer' function can only have two children: 'CenterToggleChild' & 'CenterToggleItem'.
 - Both 'CenterToggleItem' and 'CenterToggleChild' can only have one child element.
-- The children of both 'CenterToggleItem' and 'CenterToggleChild' must have an accessible ref. Failure to provide an accessible ref to either function will cause the toggled item not to appear perfectly centered.
+- The child of 'CenterToggleChild' must have an accessible ref. Failure to provide an accessible ref to it will cause the toggled item not to appear perfectly centered.
 
 ## Feedback
 Please leave feedback on the GitHub page if you notice any issues or have suggestions for improvement. I could use all of the critiques I can get especially since I have no clue what the fetch I'm doing half the time. 
