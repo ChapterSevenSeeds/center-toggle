@@ -101,9 +101,6 @@ function CenterToggleContainer(props) {
       }
     }
   }, [childrenRef, itemRef]);
-  (0, _react.useEffect)(function () {
-    if (props.toggled) {}
-  }, [props.toggled]);
   return /*#__PURE__*/_react.default.createElement(_react.Fragment, null, /*#__PURE__*/_react.default.createElement(itemChild.type, _extends({}, itemChild.props, {
     toggled: props.toggled,
     boundingBox: {
