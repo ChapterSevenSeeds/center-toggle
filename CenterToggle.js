@@ -36,12 +36,6 @@ export function CenterToggleContainer(props) {
         }
     }, [childrenRef, itemRef]);
 
-    useEffect(() => {
-        if (props.toggled) {
-
-        }
-    }, [props.toggled]);
-
     return (
         <Fragment>
             <itemChild.type {...itemChild.props} toggled={props.toggled} boundingBox={{ boundingBoxTop, boundingBoxLeft, boundingBoxHeight, boundingBoxWidth, itemHeight, itemWidth }} ref={itemRef} />
