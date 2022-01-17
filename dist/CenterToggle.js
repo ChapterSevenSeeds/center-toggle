@@ -16,6 +16,12 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e2) { throw _e2; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e3) { didErr = true; err = _e3; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
@@ -33,38 +39,20 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function CenterToggleContainer(props) {
   var itemChild, childrenChild;
 
-  var _useState = (0, _react.useState)(0),
+  var _useState = (0, _react.useState)({
+    top: 0,
+    left: 0,
+    height: 0,
+    width: 0,
+    itemHeight: 0,
+    itemWidth: 0
+  }),
       _useState2 = _slicedToArray(_useState, 2),
-      boundingBoxTop = _useState2[0],
-      setBoundingBoxTop = _useState2[1];
-
-  var _useState3 = (0, _react.useState)(0),
-      _useState4 = _slicedToArray(_useState3, 2),
-      boundingBoxLeft = _useState4[0],
-      setBoundingBoxLeft = _useState4[1];
-
-  var _useState5 = (0, _react.useState)(0),
-      _useState6 = _slicedToArray(_useState5, 2),
-      boundingBoxHeight = _useState6[0],
-      setBoundingBoxHeight = _useState6[1];
-
-  var _useState7 = (0, _react.useState)(0),
-      _useState8 = _slicedToArray(_useState7, 2),
-      boundingBoxWidth = _useState8[0],
-      setBoundingBoxWidth = _useState8[1];
-
-  var _useState9 = (0, _react.useState)(0),
-      _useState10 = _slicedToArray(_useState9, 2),
-      itemHeight = _useState10[0],
-      setItemHeight = _useState10[1];
-
-  var _useState11 = (0, _react.useState)(0),
-      _useState12 = _slicedToArray(_useState11, 2),
-      itemWidth = _useState12[0],
-      setItemWidth = _useState12[1];
+      boundingBox = _useState2[0],
+      setBoundingBox = _useState2[1];
 
   var childrenRef = (0, _react.useRef)(null);
-  var itemRef = /*#__PURE__*/(0, _react.createRef)(null);
+  var itemRef = (0, _react.useRef)(null);
 
   var _iterator = _createForOfIteratorHelper(props.children),
       _step;
@@ -78,7 +66,10 @@ function CenterToggleContainer(props) {
       } else if (child.type === CenterToggleChild) {
         childrenChild = child;
       } else {
-        console.error("CenterToggleContainer can only have two children of type 'CenterToggleItem' and 'CenterToggleChild'.");
+        if (process.env.NODE_ENV !== 'production') {
+          console.error("CenterToggleContainer can only have two children of type 'CenterToggleItem' and 'CenterToggleChild'.");
+        }
+
         throw new Error("CenterToggleContainer can only have two children of type 'CenterToggleItem' and 'CenterToggleChild'.");
       }
     }
@@ -89,28 +80,40 @@ function CenterToggleContainer(props) {
   }
 
   (0, _react.useEffect)(function () {
+    if (childrenRef.current) {
+      var resizeObserver = new ResizeObserver(update);
+      resizeObserver.observe(childrenRef.current);
+    }
+  }, [childrenRef]);
+  (0, _react.useEffect)(function () {
+    if (itemRef.current) {
+      var resizeObserver = new ResizeObserver(update);
+      resizeObserver.observe(itemRef.current);
+    }
+  }, [itemRef]);
+  (0, _react.useEffect)(function () {
+    update();
+  }, [childrenRef, itemRef]);
+
+  function update() {
     if (childrenRef.current && itemRef.current) {
-      setBoundingBoxHeight(childrenRef.current.offsetHeight);
-      setBoundingBoxWidth(childrenRef.current.offsetWidth);
-      setBoundingBoxTop(childrenRef.current.offsetTop);
-      setBoundingBoxLeft(childrenRef.current.offsetLeft);
+      boundingBox.height = childrenRef.current.offsetHeight;
+      boundingBox.width = childrenRef.current.offsetWidth;
+      boundingBox.top = childrenRef.current.offsetTop;
+      boundingBox.left = childrenRef.current.offsetLeft;
 
       if (itemRef.current.offsetHeight !== 0 && itemRef.current.offsetWidth !== 0) {
-        setItemHeight(itemRef.current.offsetHeight);
-        setItemWidth(itemRef.current.offsetWidth);
+        boundingBox.itemHeight = itemRef.current.offsetHeight;
+        boundingBox.itemWidth = itemRef.current.offsetWidth;
       }
+
+      setBoundingBox(_objectSpread({}, boundingBox));
     }
-  }, [childrenRef, itemRef]);
+  }
+
   return /*#__PURE__*/_react.default.createElement(_react.Fragment, null, /*#__PURE__*/_react.default.createElement(itemChild.type, _extends({}, itemChild.props, {
     toggled: props.toggled,
-    boundingBox: {
-      boundingBoxTop: boundingBoxTop,
-      boundingBoxLeft: boundingBoxLeft,
-      boundingBoxHeight: boundingBoxHeight,
-      boundingBoxWidth: boundingBoxWidth,
-      itemHeight: itemHeight,
-      itemWidth: itemWidth
-    },
+    boundingBox: boundingBox,
     ref: itemRef
   })), /*#__PURE__*/_react.default.createElement(childrenChild.type, _extends({}, childrenChild.props, {
     ref: childrenRef
@@ -119,18 +122,18 @@ function CenterToggleContainer(props) {
 
 var CenterToggleItem = /*#__PURE__*/(0, _react.forwardRef)(function (props, ref) {
   var _props$boundingBox = props.boundingBox,
-      boundingBoxTop = _props$boundingBox.boundingBoxTop,
-      boundingBoxLeft = _props$boundingBox.boundingBoxLeft,
-      boundingBoxHeight = _props$boundingBox.boundingBoxHeight,
-      boundingBoxWidth = _props$boundingBox.boundingBoxWidth,
+      top = _props$boundingBox.top,
+      left = _props$boundingBox.left,
+      height = _props$boundingBox.height,
+      width = _props$boundingBox.width,
       itemHeight = _props$boundingBox.itemHeight,
       itemWidth = _props$boundingBox.itemWidth;
   return /*#__PURE__*/_react.default.createElement("div", {
     ref: ref,
     style: {
       position: 'absolute',
-      top: boundingBoxTop + boundingBoxHeight / 2 - itemHeight / 2,
-      left: boundingBoxLeft + boundingBoxWidth / 2 - itemWidth / 2,
+      top: top + height / 2 - itemHeight / 2,
+      left: left + width / 2 - itemWidth / 2,
       visibility: itemHeight === 0 && itemWidth === 0 ? 'hidden' : 'visible'
     }
   }, (props.toggled || itemHeight === 0 && itemWidth === 0) && props.children);
@@ -151,3 +154,4 @@ var CenterToggleChild = /*#__PURE__*/(0, _react.forwardRef)(function (props, ref
   }, child.props));
 });
 exports.CenterToggleChild = CenterToggleChild;
+//# sourceMappingURL=CenterToggle.js.map
