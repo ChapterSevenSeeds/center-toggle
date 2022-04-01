@@ -6,6 +6,6 @@ declare module 'react-center-toggle' {
     }
 
     export const CenterToggleContainer: React.FC<CenterToggleContainerProps>;
-    export const CenterToggleItem: React.FC<>;
-    export const CenterToggleChild: React.FC<>;
+    export const CenterToggleItem: React.FC<{}>;
+    export const CenterToggleChild: React.FC<{}>;
 }
